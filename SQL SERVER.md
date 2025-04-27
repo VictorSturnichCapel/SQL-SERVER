@@ -222,6 +222,12 @@ FROM table_name AS A, table_name AS B
 WHERE condition;
 ```
 
-Subquery: uma query dentro de outra que é utilizada para algum tipo de comparação.
+SUBQUERY: uma query dentro de outra que é utilizada para algum tipo de comparação.
 
 select * from Production.Product where ListPrice > (select AVG(ListPrice) from Production.Product)
+
+OFFSET: serve para ignorar as primeiras x linhas de retorno e pode ser combinado com o LIMIT
+
+Por exemplo: Gostaria de pegar os o segundo melhor funcionário em questão de salário
+
+select e.name from Employee as e order by e.salary Offset 1 limit 1
