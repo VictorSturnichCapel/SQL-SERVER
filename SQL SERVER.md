@@ -1,4 +1,3 @@
-
 SQL Server -> Servidor de comunicação dos bancos de dados.
 
 SQL  Server Management Studio -> SSMS, gerenciador de banco de dados e faz a comunicação e comandos no SQL Server.
@@ -226,8 +225,17 @@ SUBQUERY: uma query dentro de outra que é utilizada para algum tipo de compara�
 
 select * from Production.Product where ListPrice > (select AVG(ListPrice) from Production.Product)
 
+SELECT * from Person.Address where StateProvinceID in ( SELECT StateProvinceID from person.StateProvince WHERE NAME = 'Alberta')
+
+DATEPART: saber informações relevantes de datas.
+
+SELECT SalesOrderId, DATEPART(year,  OrderDate) as 'Mês' FROM Sales.SalesOrderHeader
+
+SELECT AVG(TotalDue) as Media, DATEPART(month,  OrderDate) as 'Mês' FROM Sales.SalesOrderHeader GROUP BY DATEPART(month,  OrderDate)
+
 OFFSET: serve para ignorar as primeiras x linhas de retorno e pode ser combinado com o LIMIT
 
 Por exemplo: Gostaria de pegar os o segundo melhor funcionário em questão de salário
 
 select e.name from Employee as e order by e.salary Offset 1 limit 1
+
