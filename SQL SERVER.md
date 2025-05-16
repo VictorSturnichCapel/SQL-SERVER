@@ -239,3 +239,4 @@ Por exemplo: Gostaria de pegar os o segundo melhor funcionário em questão de s
 
 select e.name from Employee as e order by e.salary Offset 1 limit 1
 
+
