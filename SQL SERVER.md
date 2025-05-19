@@ -104,6 +104,12 @@ SELECT * from Person.Person WHERE FirstName like '%essa%'
 
 SELECT * from Person.Person WHERE FirstName like '%ro_'
 
+REGEX: + Avançado que o LIKE
+
+SELECT * FROM products
+WHERE description REGEXP '^* SN[0-9]{4}-[0-9]{4}(?![0-9])'
+ORDER BY product_id;
+
 1° Desafio
 select COUNT(name) as countlist from Production.Product where 1 = 1 and ListPrice > 1500
 
