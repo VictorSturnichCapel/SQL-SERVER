@@ -1,6 +1,5 @@
 SQL Server -> Servidor de comunicação dos bancos de dados.
 
-
 SQL  Server Management Studio -> SSMS, gerenciador de banco de dados e faz a comunicação e comandos no SQL Server.
 
  Abrir o SSMS - Conexão é feita com o database engine e server name: localhost\SQLEXPRESS
