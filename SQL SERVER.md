@@ -2,7 +2,7 @@ SQL Server -> Servidor de comunicação dos bancos de dados.
 
 SQL  Server Management Studio -> SSMS, gerenciador de banco de dados e faz a comunicação e comandos no SQL Server.
 
-Abrir o SSMS - Conexão é feita com o database engine e server name: localhost\SQLEXPRESS
+ Abrir o SSMS - Conexão é feita com o database engine e server name: localhost\SQLEXPRESS
 
 Restaurar um banco de dados -> abrir o SSMS, ir em Databases, com o botão direito e ir em Restore Databases.
 
@@ -103,12 +103,6 @@ SELECT * from Person.Person WHERE FirstName like '%essa%'
 
 SELECT * from Person.Person WHERE FirstName like '%ro_'
 
-REGEX: + Avançado que o LIKE
-
-SELECT * FROM products
-WHERE description REGEXP '^* SN[0-9]{4}-[0-9]{4}(?![0-9])'
-ORDER BY product_id;
-
 1° Desafio
 select COUNT(name) as countlist from Production.Product where 1 = 1 and ListPrice > 1500
 
@@ -126,6 +120,12 @@ select COUNT(Product.Color ) from Production.Product where 1 = 1 AND Product.Col
 
 6° Desafio
 select COUNT(Product.Name) from Production.Product where 1 = 1 and Product.Name like '%road%'
+
+REGEX: + avançado que o LIKE
+
+'''
+SELECT * FROM products WHERE description REGEXP '^* SN[0-9]{4}-[0-9]{4}(?![0-9])' ORDER BY product_id;
+'''
 
 MIN, MAX, SUM e AVG: Funções de agregação, basicamente agregam ou combinam dados de uma tabela em 1 resultado único.
 
@@ -245,4 +245,174 @@ Por exemplo: Gostaria de pegar os o segundo melhor funcionário em questão de s
 
 select e.name from Employee as e order by e.salary Offset 1 limit 1
 
+OPERAÇÃO EM STRINGS 
 
+SELECT CONCAT(FirstName, ' ', LastName) from Person.Person 
+
+SELECT UPPER(FirstName), LOWER(FirstName) from Person.Person 
+
+SELECT LEN(FirstName) from Person.Person 
+
+SELECT SUBSTRING(FirstName, 1,3) from Person.Person
+
+SELECT REPLACE(ProductNumber, '-', '#') from Production.Product
+
+FUNÇÕES MATEMÁTICAS
+
+SELECT MAX(LineTotal) from Sales.SalesOrderDetail
+
+SELECT MIN(LineTotal) from Sales.SalesOrderDetail
+
+SELECT AVG(LineTotal) from Sales.SalesOrderDetail
+
+SELECT ROUND(AVG(LineTotal),2) from Sales.SalesOrderDetail
+
+SELECT SQRT(LineTotal) from Sales.SalesOrderDetail
+
+MODA:
+
+SELECT
+    tipo,
+    COUNT(*) AS frequencia
+FROM
+    produtos
+GROUP BY
+    tipo
+ORDER BY
+    frequencia DESC
+LIMIT 1;
+
+TIPOS DE DADOS
+
+1. Boleanos
+2. Caracteres
+3. Números
+4. Temporais
+
+Boleano -> int, podendo ser 1 ou 0
+
+Caracteres ->
+tamanho fixo - char. O valor definido sempre vai ser alocado na memória independente do valor utilizado. 
+
+tamanhos variáveis - varchar ou nvarchar. Permite inserir até uma quantidade máxima e irá utilizar até a quantidade utilizada na memória.
+
+Números -> 
+Valores Exatos
+
+1. TINYINT -  não tem valores fracionados
+2. SMALLINT - TINYINT com maior valor inteiro
+3. INT - SMALLINT com maior valor inteiro
+4. BIGINT - INT com maior valor inteiro
+5. NUMERIC ou DECIMAL - valores exatos, porém permite ter parte fracionadas que também podem ser especificadas a precisão e a escala (escala é o número de digitos na parte fracional) ex: NUMERIC (5,2) 113,44
+
+Valores Aproximados
+1. REAL - tem precisão aproximada de até 15 digitos
+2. FLOAT - mesmo conceito de REAL
+
+Temporais
+
+DATE - armazena data no formato aaaa/mm/dd
+DATETIME - armazena data e horas no formato aaaa/mm/dd::hh::mm::ss
+DATETIME2 - armazena data e horas com milissegundos no formato aaaa/mm/dd::hh::mm::sssssss
+SMALLDATETIME - data e horas nos respeitando o limite entre '1900-01-01:00:00:00' até '2079-06-06:23:59:59'
+TIME - horas, minutos, segundos e milissegundos respeitando o limite de '00:00:00.0000000' até '23:59:59.9999999'
+DATETIMEOFFSET - permite armazenar informações de data e horas incluindo o fuso horário
+
+CHAVE PRIMARIA E ESTRANGEIRA
+
+* Chave primária, coluna que possui registro único para identificar uma coluna.
+* Chave estrangeira, coluna de uma tabela que possui o registro único de outra
+* Relacionamento é fazer vínculo entre chave primária com chave secundária de outra
+
+Criar tabela
+
+CREATE TABLE nome_tabela (
+	nomeColuna tipoDado PRIMARY KEY
+	nomeColuna tipoDado ...
+)
+
+Principais tipos de restrições que podem ser aplicadas
+NOT NULL - não permite nulos
+UNIQUE - Força que todos os valores sejam diferentes
+PRIMARY KEY - uma junção de NOT NULL e UNIQUE
+FOREIGN KEY - identifica unicamente uma linha outra tabela
+CHECK - FORÇA uma condição específica em uma coluna
+DEFAULT - força um valor padrão caso seja nulo
+
+INSERT INTO - Insere valores em uma tabela 
+
+INSERT INTO nomeTabela(coluna1, coluna2, ...) 
+VALUES (valor1, valor2, ...),
+ (valor1, valor2, ...),
+ (valor1, valor2, ...),
+
+UPDATE - Atualiza informações de uma tabela
+
+UPDATE nomeTabela
+set coluna1 = valor1
+coluna2 = valor2
+WHERE condicao
+
+DELETE - deleta informações de uma tabela
+
+DELETE from nomeTabela
+where condicao
+
+ALTER TABLE - Alterar a estrutura de uma tabela
+
+ALTER TABLE nomeTabela
+ACAO
+
+- Add, Remover or alterar uma coluna
+- Setar valores padrões para uma coluna
+- Add ou Remover restrições de colunas
+- Renomear uma tabela
+
+ALTER TABLE youtube add ativo bit
+
+ALTER TABLE youtube ALTER COLUMN categoria varchar(300) NOT NULL
+
+EXEC sp_RENAME 'nomeTabela.nomeColunaAtual', 'nomeColunaNova', 'COLUMN'
+
+EXEC sp_RENAME 'nomeTabela', 'nomeTabelaNova'
+
+DROP TABLE - exclui uma tabela
+
+DROP TABLE nomeTabela
+
+TRUNCATE - Limpa a tabela
+
+TRUNCATE TABLE Person.password
+
+CHECK CONSTRAINT - Checar valores 
+
+CREATE TABLE CarteiraMotorista(
+	 id int NOT NULL,
+	 Nome varchar(255) NOT NULL,
+	 Idade int CHECK ( Idade >= 18)
+);
+
+NOT NULL - Não deixar nulo um valor
+
+CREATE TABLE CarteiraMotorista(
+	 id int NOT NULL,
+	 Nome varchar(255) NOT NULL,
+	 Idade int CHECK ( Idade >= 18)
+);
+
+
+UNIQUE - Não deixar adicionar valor repetido
+
+CREATE TABLE CarteiraMotorista(
+	 id int NOT NULL,
+	 Nome varchar(255) NOT NULL,
+	 Idade int CHECK ( Idade >= 18),
+	 CodigoCNH int NOT NULL UNIQUE
+);
+
+VIEW - Guarda informações de select em uma variável 
+
+CREATE VIEW '[Pessoas Simplificado]' AS
+SELECT FirstName, MiddleName, LastName
+from Person.Person
+where title = 'Ms.'
