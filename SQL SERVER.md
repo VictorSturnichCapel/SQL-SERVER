@@ -123,6 +123,45 @@ select COUNT(Product.Name) from Production.Product where 1 = 1 and Product.Name 
 
 REGEX: + avançado que o LIKE
 
+Regex normalmente vem entre // nas linguagens.
+
+as letras ao final significam flags que vão mudar alguns comportamentos do REGEX
+
+g -> global, todas as ocorrências, não só uma
+
+i -> insensitive, A <> a
+
+m -> multiline
+
+. -> significa qualquer caractere
+
+| -> OR
+
+() -> group
+
+[a-z] | [0-9] -> sequência
+
+^ -> exceto, ou seja, se tiver um [^et], irá pegar todas as letras menos o 'e' e o 't'.
+    Se estiver no começo da expressão, ele irá ver se começa com aquela sequência: /^este/
+
++ -> agrupa como um único grupo caso os valores seguintes sejam iguais: essencial > /(s+)/ > 'ss' como um array único
+
+* -> quando for 0 ou mais, ou seja, é o + com a opção do 0
+
+? -> torna aquele grupo opcional, caso não exista irá ignorar
+
+s{2,3} -> pega onde existe 2 ou 3 valores seguidos
+
+$ -> precisa terminar com um valor: /este$/
+
+\ -> saber o caractere literal: /\./ para encontrar um . no texto
+
+[a-z0-9] -> Já junta letras a números
+
+Validar e-mail: /([a-z0-9\.\-]{2,}@)([a-z0-9]{2,}\.)([a-z]{2,})(\.[a-z]{2,})?/
+
+Validar telefone: /([\(0-9\)]{4})\s(9)?([0-9]{4})-([0-9]{4})/
+
 '''
 SELECT * FROM products WHERE description REGEXP '^* SN[0-9]{4}-[0-9]{4}(?![0-9])' ORDER BY product_id;
 '''
