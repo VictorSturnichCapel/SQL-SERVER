@@ -206,6 +206,8 @@ $ -> precisa terminar com um valor: /este$/
 [a-z0-9] -> Já junta letras a números
 
 ```
+LeetCode test: ((^|\s)RA[a-zA-Z0-9]{5}-[a-zA-Z0-9]{2}(\s|$))
+
 Validar e-mail: /([a-z0-9\.\-]{2,}@)([a-z0-9]{2,}\.)([a-z]{2,})(\.[a-z]{2,})?/
 
 Validar telefone: /([\(0-9\)]{4})\s(9)?([0-9]{4})-([0-9]{4})/
@@ -481,10 +483,12 @@ CHAVE PRIMARIA E ESTRANGEIRA
 
 CRIAR TABELA
 
+```
 CREATE TABLE nome_tabela (
 	nomeColuna tipoDado PRIMARY KEY
 	nomeColuna tipoDado ...
 )
+```
 
 Principais tipos de restrições que podem ser aplicadas
 NOT NULL - não permite nulos
@@ -498,26 +502,32 @@ DEFAULT - força um valor padrão caso seja nulo
 
 INSERT INTO - Insere valores em uma tabela 
 
+```
 INSERT INTO nomeTabela(coluna1, coluna2, ...) 
 VALUES (valor1, valor2, ...),
  (valor1, valor2, ...),
  (valor1, valor2, ...),
+```
 
 ---
 
 UPDATE - Atualiza informações de uma tabela
 
+```
 UPDATE nomeTabela
 set coluna1 = valor1
 coluna2 = valor2
 WHERE condicao
+```
 
 ---
 
 DELETE - deleta informações de uma tabela
 
+```
 DELETE from nomeTabela
 where condicao
+```
 
 ---
 
@@ -531,6 +541,7 @@ ACAO
 - Add ou Remover restrições de colunas
 - Renomear uma tabela
 
+```
 ALTER TABLE youtube add ativo bit
 
 ALTER TABLE youtube ALTER COLUMN categoria varchar(300) NOT NULL
@@ -538,55 +549,68 @@ ALTER TABLE youtube ALTER COLUMN categoria varchar(300) NOT NULL
 EXEC sp_RENAME 'nomeTabela.nomeColunaAtual', 'nomeColunaNova', 'COLUMN'
 
 EXEC sp_RENAME 'nomeTabela', 'nomeTabelaNova'
+```
 
 ---
 
 DROP TABLE - exclui uma tabela
 
+```
 DROP TABLE nomeTabela
+```
 
 ---
 
 TRUNCATE - Limpa a tabela
 
+```
 TRUNCATE TABLE Person.password
+```
 
 ---
 
 CHECK CONSTRAINT - Checar valores 
 
+```
 CREATE TABLE CarteiraMotorista(
 	 id int NOT NULL,
 	 Nome varchar(255) NOT NULL,
 	 Idade int CHECK ( Idade >= 18)
 );
+```
 
 ---
 
 NOT NULL - Não deixar nulo um valor
 
+```
 CREATE TABLE CarteiraMotorista(
 	 id int NOT NULL,
 	 Nome varchar(255) NOT NULL,
 	 Idade int CHECK ( Idade >= 18)
 );
+```
 
 ---
 
 UNIQUE - Não deixar adicionar valor repetido
 
+```
 CREATE TABLE CarteiraMotorista(
 	 id int NOT NULL,
 	 Nome varchar(255) NOT NULL,
 	 Idade int CHECK ( Idade >= 18),
 	 CodigoCNH int NOT NULL UNIQUE
 );
+```
 
 ---
 
 VIEW - Guarda informações de select em uma variável 
 
+```
 CREATE VIEW '[Pessoas Simplificado]' AS
 SELECT FirstName, MiddleName, LastName
 from Person.Person
 where title = 'Ms.'
+```
