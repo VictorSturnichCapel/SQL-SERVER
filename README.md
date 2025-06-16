@@ -1,6 +1,5 @@
 # 📚 Resumo de Estudo: SQL Server e SQL
 
-
 ## 🎯 Conceitos Iniciais
 
 - **SQL Server**: Servidor que gerencia bancos de dados relacionais.
