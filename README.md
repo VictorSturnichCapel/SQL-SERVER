@@ -139,3 +139,4 @@ WHERE ListPrice > (SELECT AVG(ListPrice) FROM Production.Product);
 > Diversos desafios utilizando `SELECT`, `COUNT`, `GROUP BY`, `JOIN`, `HAVING`, `LIKE`, `IN`, entre outros. (Consultar lista completa para prática!)
 
 ---
+
