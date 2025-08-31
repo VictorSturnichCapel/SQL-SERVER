@@ -2,6 +2,7 @@
 
 ## 🎯 Conceitos Iniciais
 
+
 - **SQL Server**: Servidor que gerencia bancos de dados relacionais.
 - **SQL Server Management Studio (SSMS)**: Interface para interagir com o SQL Server.
 - **Conexão no SSMS**:
